@@ -1,0 +1,21 @@
+﻿@model Dictionary<string, CSDl_NC.Models.NormalizationModel>
+    @{
+    ViewData["Title"] = "Chuẩn Hóa";
+    }
+
+    <h1>Chuẩn Hóa Cơ Sở Dữ Liệu</h1>
+    <div>
+        @foreach (var normalForm in Model)
+        {
+        <div style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
+            <h2>@normalForm.Value.NormalForm</h2>
+            <p>@normalForm.Value.Description</p>
+            <ul>
+                @foreach (var rule in normalForm.Value.Rules)
+                {
+                <li>@rule</li>
+                }
+            </ul>
+        </div>
+        }
+    </div>
