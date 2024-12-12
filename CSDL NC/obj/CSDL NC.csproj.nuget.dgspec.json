@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nhubinh/Projects/CSDL NC/CSDL NC/CSDL NC.csproj": {}
+    "/Users/nhubinh/Documents/CSDL_NC/CSDL NC/CSDL NC.csproj": {}
   },
   "projects": {
-    "/Users/nhubinh/Projects/CSDL NC/CSDL NC/CSDL NC.csproj": {
+    "/Users/nhubinh/Documents/CSDL_NC/CSDL NC/CSDL NC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nhubinh/Projects/CSDL NC/CSDL NC/CSDL NC.csproj",
+        "projectUniqueName": "/Users/nhubinh/Documents/CSDL_NC/CSDL NC/CSDL NC.csproj",
         "projectName": "CSDL NC",
-        "projectPath": "/Users/nhubinh/Projects/CSDL NC/CSDL NC/CSDL NC.csproj",
+        "projectPath": "/Users/nhubinh/Documents/CSDL_NC/CSDL NC/CSDL NC.csproj",
         "packagesPath": "/Users/nhubinh/.nuget/packages/",
-        "outputPath": "/Users/nhubinh/Projects/CSDL NC/CSDL NC/obj/",
+        "outputPath": "/Users/nhubinh/Documents/CSDL_NC/CSDL NC/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/nhubinh/.nuget/NuGet/NuGet.Config"

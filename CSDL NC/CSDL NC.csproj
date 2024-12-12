@@ -10,12 +10,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-    <None Remove="Views\ChuanHoa\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\ChuanHoa\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Remove="Views\ChuanHoa\Index.cshtml" />
     <Content Remove="Views\BaoDong\Index.cshtml" />
   </ItemGroup>

@@ -19,33 +19,28 @@ namespace CSDL_NC.Controllers
                     return BadRequest(new { message = "Vui lòng nhập đầy đủ các thông tin." });
                 }
 
-                // Tách và chuẩn hóa các thuộc tính ban đầu
                 var attributes = model.Attributes.Split(',').Select(a => a.Trim().ToUpper()).ToList();
                 var dependencies = ParseDependencies(model.FunctionalDependencies);
 
-                // Bước 1: Tìm tập TN và TG
                 var tn = new HashSet<string>(); // Tập tối thiểu (TN)
                 var tg = new HashSet<string>(attributes); // Tập tổng (TG)
 
-                // Bước 2: Nếu TG rỗng hoặc TN bao gồm tập rỗng thì khóa = TN.
                 if (tg.Count == 0 || tn.Contains("Q+"))
                 {
                     return Ok(new
                     {
-                        superKeys = new List<string> { string.Join("", tn) }, // Không có dấu phẩy
-                        keys = new List<string> { string.Join("", tn) } // Không có dấu phẩy
+                        superKeys = new List<string> { string.Join("", tn) },
+                        keys = new List<string> { string.Join("", tn) }
                     });
                 }
 
-                // Bước 3: Tìm tất cả tập con Xi của TG
                 var subsets = GenerateSubsets(attributes);
-
-                // Bước 4: Tạo TK và kiểm tra các tập con
-                var tk = new List<List<string>>();
+                var superKeys = new List<List<string>>(); // Danh sách siêu khóa
+                var keys = new List<List<string>>(); // Danh sách khóa chính
 
                 foreach (var subset in subsets)
                 {
-                    if (subset.Count == 0) continue; // Bỏ qua tập rỗng
+                    if (subset.Count == 0) continue;
 
                     // Tính bao đóng của tập con
                     var closure = CalculateAttributeClosure(subset, dependencies);
@@ -53,48 +48,41 @@ namespace CSDL_NC.Controllers
                     // Nếu bao đóng bao phủ toàn bộ thuộc tính
                     if (closure.SetEquals(tg))
                     {
-                        // Thêm siêu khóa mới
-                        tk.Add(new List<string>(subset));
-                    }
-                }
+                        superKeys.Add(new List<string>(subset)); // Thêm vào danh sách siêu khóa
 
-                // Bước 5: Lọc TK để loại bỏ các tập con
-                var keys = new List<List<string>>();
-
-                foreach (var ki in tk)
-                {
-                    bool isKey = true;
-                    // Kiểm tra xem có khóa khác nào là tập con của ki không
-                    foreach (var kj in keys)
-                    {
-                        if (kj.All(ki.Contains))
+                        // Kiểm tra xem tập con này có phải là khóa chính không
+                        bool isKey = true;
+                        foreach (var existingKey in keys)
                         {
-                            isKey = false;
-                            break;
+                            if (existingKey.All(subset.Contains))
+                            {
+                                isKey = false;
+                                break;
+                            }
                         }
-                    }
 
-                    // Nếu ki là khóa mới
-                    if (isKey)
-                    {
-                        // Loại bỏ các khóa cũ là tập con của ki
-                        keys.RemoveAll(existingKey => ki.All(existingKey.Contains));
-                        keys.Add(ki);
+                        // Nếu subset là khóa chính mới
+                        if (isKey)
+                        {
+                            // Loại bỏ các khóa cũ là tập con của subset
+                            keys.RemoveAll(existingKey => subset.All(existingKey.Contains));
+                            keys.Add(new List<string>(subset));
+                        }
                     }
                 }
 
                 return Ok(new
                 {
-                    superKeys = tk.Select(sk => string.Join("", sk)).ToList(), // Không có dấu phẩy
-                    keys = keys.Select(key => string.Join(", ", key)).ToList() // Giữ dấu phẩy cho khóa chính
+                    superKeys = superKeys.Select(sk => string.Join("", sk)).ToList(),
+                    keys = keys.Select(key => string.Join("", key)).ToList()
                 });
             }
             catch (Exception ex)
             {
-                // Ghi lại lỗi để dễ dàng theo dõi
                 return StatusCode(500, new { message = "Đã xảy ra lỗi: " + ex.Message });
             }
         }
+
 
         private List<FunctionalDependency> ParseDependencies(string dependenciesString)
         {

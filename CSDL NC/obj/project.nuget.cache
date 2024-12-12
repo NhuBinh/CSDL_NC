@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TovRt2GXIZA=",
+  "dgSpecHash": "n5X1TdY+nBQ=",
   "success": true,
-  "projectFilePath": "/Users/nhubinh/Projects/CSDL NC/CSDL NC/CSDL NC.csproj",
+  "projectFilePath": "/Users/nhubinh/Documents/CSDL_NC/CSDL NC/CSDL NC.csproj",
   "expectedPackageFiles": [
     "/Users/nhubinh/.nuget/packages/humanizer/2.14.1/humanizer.2.14.1.nupkg.sha512",
     "/Users/nhubinh/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",

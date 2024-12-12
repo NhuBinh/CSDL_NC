@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSDL NC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b48a6452c610645b9572f39623cdd03c4ec5d5ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSDL NC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSDL NC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
